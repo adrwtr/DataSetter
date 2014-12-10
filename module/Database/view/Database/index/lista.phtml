@@ -1,0 +1,6 @@
+ <?php foreach ($arrArquivos as $arquivos) : ?>
+ <?php echo $arquivos;?>
+ <br>
+ <a href="<?php echo $this->url('database', array('action'=>'arquivo', 'arquivo' => $arquivos ));?>">Edit</a>
+
+ <?php endforeach; ?>       

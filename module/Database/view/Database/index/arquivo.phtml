@@ -1,0 +1,9 @@
+Arquivo: <b><? echo $arquivo; ?></b>
+<Br><br>
+Conteudo:
+<hr>
+<? echo $conteudo; ?>
+<hr>
+<a href="<?php echo $this->url('processar', array('action'=>'processar', 'arquivo' => $arquivo ));?>">
+Continuar
+</a>

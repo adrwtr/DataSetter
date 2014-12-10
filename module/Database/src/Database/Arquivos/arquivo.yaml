@@ -1,0 +1,5 @@
+estnc_areas:
+    campos_preencher:
+        ds_area: tipo_nomes
+        sn_ativo: tipo_bool
+    registros: 10

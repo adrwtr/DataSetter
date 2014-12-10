@@ -1,0 +1,15 @@
+PHPUnit 4.3.5 by Sebastian Bergmann.
+
+Configuration read from C:\Apache24\htdocs\data\module\Database\test\phpunit.xml.dist
+
+............
+
+Time: 270 ms, Memory: 6.00Mb
+
+OK (12 tests, 15 assertions)
+phpcpd 2.0.1 by Sebastian Bergmann.
+
+0.00% duplicated lines out of 586 total lines of code.
+
+Time: 80 ms, Memory: 2.25Mb
+
