@@ -1,5 +1,14 @@
 estnc_areas:
     campos_preencher:
-        ds_area: tipo_nomes
+        ds_area: tipo_nome_proprio
         sn_ativo: tipo_bool
     registros: 10
+    de_para:
+        nome_tabela:
+            origem: campo
+            destino: campo
+            registros: 5
+        nome_tabela:
+            origem: campo
+            destino: campo
+            registros: 5

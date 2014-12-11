@@ -1,6 +1,9 @@
 <?php
 namespace Database\Parser\Elementos;
 
+use Database\Parser\Elementos\Tipos\TiposFactory;
+use Database\Parser\Elementos\Tipos\Tipo;
+
 class CampoPreencher {
     
     /**
@@ -25,11 +28,16 @@ class CampoPreencher {
     {
         $this->setNome($nome);
         $this->setTipo($tipo);
+        $this->parse();
     }
 
     public function parse()
     {
-        return true;
+        $this->setObjTipo(
+            TiposFactory::criarTipo(
+                $this->getTipo()
+            )
+        );
     }
 
 

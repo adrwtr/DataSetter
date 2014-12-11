@@ -6,6 +6,8 @@ use Database\Parser\Elementos\CampoPreencher;
 class Tabela {
 
     const CAMPOS_PREENCHER = 'campos_preencher';
+    const QTD_REGISTROS = 'registros';
+    const DE_PARA = 'de_para';
 
     /**
      * nome da tabela
@@ -18,12 +20,24 @@ class Tabela {
      * @var array
      */
     private $arrCamposPreencher;
+
+    /**
+     * quantidade de registros a serem criados
+     * @var int
+     */
+    private $qtd_registros;
     
     /**
      * array de campos a preencher
-     * @var [type]
+     * @var array of CampoPreencher
      */
     private $arrObjCampoPreencher;
+
+    /**
+     * array de depara - as foreingkeys
+     * @var array of DePara
+     */
+    private $arrObjDePara;
 
 
     public function __construct($nome_tabela, $arrValores)
@@ -60,6 +74,10 @@ class Tabela {
      */
     public function parse($arrValores)
     {
+        $this->setQtdRegistros(
+            $arrValores[self::QTD_REGISTROS]
+        );
+        
         $this->arrCamposPreencher = $arrValores[self::CAMPOS_PREENCHER];
         $this->parseCamposPreencher();
 
@@ -98,6 +116,35 @@ class Tabela {
     public function getArrObjCamposPreencher()
     {
         return $this->arrObjCampoPreencher;
+    }
+
+    /**
+     * Retorna a quantidade de registros
+     * @return int
+     */
+    public function getQtdRegistros()
+    {
+        return $this->qtd_registros;
+    }
+
+    /**
+     * Seta a quantidade de registros
+     * @param int
+     * @return self
+     */
+    public function setQtdRegistros($valor)
+    {
+        $this->qtd_registros = $valor;
+        return $this;
+    }
+
+    /**
+     * retorna o array de de para - foreingkeys
+     * @return array of DePara
+     */
+    public function getArrObjDePara()
+    {
+        return $this->arrObjDePara;
     }
         
 }
