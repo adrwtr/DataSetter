@@ -1,14 +1,19 @@
 estnc_areas:
     campos_preencher:
+        cd_area: tipo_pk
         ds_area: tipo_nome_proprio
-        sn_ativo: tipo_bool
-    registros: 10
+        sn_ativo: tipo_nome_field
+    registros: 2
     de_para:
-        nome_tabela:
-            origem: campo
-            destino: campo
-            registros: 5
-        nome_tabela:
-            origem: campo
-            destino: campo
-            registros: 5
+        estnc_estagios:
+            origem: cd_area
+            destino: cd_area            
+estnc_estagios:
+    campos_preencher:
+        cd_estagio: tipo_pk
+        nm_pessoa: tipo_nome_proprio
+    registros: 2
+
+
+    ao montar o estnc_estagios, verificar em outras tabelas se tem de_para
+    se tiver, montar o insert baseado no de_para

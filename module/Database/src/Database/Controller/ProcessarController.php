@@ -5,8 +5,12 @@ namespace Database\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+use Database\Controller\IndexController;
+
 use Database\File\ArquivoYaml;
 use Database\Parser\DataParser;
+use Database\Acoes\AcaoGerarInsert;
+
 
 class ProcessarController extends abstractActionController
 {
@@ -15,20 +19,33 @@ class ProcessarController extends abstractActionController
         $arquivo = $this->params()
             ->fromRoute('arquivo', '');
 
-        $this->process($arquivo);
 
-        return new ViewModel();
+        $objDataParser = $this->processar($arquivo);
+
+        foreach ($objDataParser->getArrObjTabelas() as $value) {
+            $objAcaoGerarInsert = new AcaoGerarInsert($value);
+            $objAcaoGerarInsert->executar();
+            $sql .= $objAcaoGerarInsert->getLog();
+        }
+
+        return new ViewModel(array('sql' => $sql));
     }
 
-    private function process($arquivo)
+    /**
+     * processa o arquivo
+     * @param  string arquivo
+     * @return DataParser
+     */
+    private function processar($arquivo)
     {
         if ($arquivo != '') {
             $objArquivoYaml = new ArquivoYaml(
-                $this->getPath() .'\\'. $arquivo
+                IndexController::getPath() .'\\'. $arquivo
             );
 
             $arrYaml = $objArquivoYaml->getYaml();
             $objDataParser = new DataParser($arrYaml);
+            $objDataParser->parseTabelas();
             return $objDataParser;
         }
     }

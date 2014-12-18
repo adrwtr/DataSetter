@@ -1,5 +1,5 @@
 <?php
-namespace DatabaseTest\file;
+namespace DatabaseTest\File;
 
 use Database\File\ArquivoYaml;
 use org\bovigo\vfs\vfsStream;

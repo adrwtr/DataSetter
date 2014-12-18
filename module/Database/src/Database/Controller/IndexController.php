@@ -10,7 +10,7 @@ use Database\File\ArquivoYaml;
 
 class IndexController extends abstractActionController
 {
-    private function getPath()
+    public static function getPath()
     {
         return realpath(dirname(__DIR__)) . '\Arquivos';
     }

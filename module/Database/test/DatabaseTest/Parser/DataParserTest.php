@@ -9,29 +9,57 @@ class DataParserTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             'campos_preencher' => array(
-                'ds_area' => 'tipo_nomes',
-                'sn_ativo' => 'tipo_bool'
+                'ds_area' => 'tipo_nome_field',
+                'sn_ativo' => 'tipo_nome_field'
             )
         );
             
     }
+
+    public static function mockDePara()
+    {
+        return array(
+            'de_para' => array(
+                'nome_tabela' => array(
+                    'origem' => 'campo',
+                    'destino' => 'campo',
+                    'registros' => 2,
+                )
+            )
+        );          
+    }
+
     public static function mockArray()
     {
         return array(
             'estnc_areas' => array(
                 'campos_preencher' => array(
-                    'ds_area' => 'tipo_nomes',
-                    'sn_ativo' => 'tipo_bool'
+                    'ds_area' => 'tipo_nome_field',
+                    'sn_ativo' => 'tipo_nome_field'
                 ),
-                'registros' => 10
+                'registros' => 2,
+                'de_para' => array(
+                    'nome_tabela' => array(
+                        'origem' => 'campo',
+                        'destino' => 'campo',
+                        'registros' => 2,
+                    )
+                )
             ),
 
             'estnc_valores' => array(
                 'campos_preencher' => array(
-                    'ds_area' => 'tipo_nomes',
-                    'sn_ativo' => 'tipo_bool'
+                    'ds_area' => 'tipo_nome_field',
+                    'sn_ativo' => 'tipo_nome_field'
                 ),
-                'registros' => 10
+                'registros' => 2,
+                'de_para' => array(
+                    'nome_tabela' => array(
+                        'origem' => 'campo',
+                        'destino' => 'campo',
+                        'registros' => 2,
+                    )
+                )
             ),
         );
     }

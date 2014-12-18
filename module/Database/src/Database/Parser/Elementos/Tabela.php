@@ -2,12 +2,17 @@
 namespace Database\Parser\Elementos;
 
 use Database\Parser\Elementos\CampoPreencher;
+use Database\Parser\Elementos\DePara;
 
 class Tabela {
 
     const CAMPOS_PREENCHER = 'campos_preencher';
     const QTD_REGISTROS = 'registros';
     const DE_PARA = 'de_para';
+    const ORIGEM = 'origem';
+    const DESTINO = 'destino';
+    const REGISTROS = 'registros';
+
 
     /**
      * nome da tabela
@@ -39,10 +44,17 @@ class Tabela {
      */
     private $arrObjDePara;
 
+    /**
+     * array com o valor depara
+     * @var array
+     */
+    private $arrDePara;
+
 
     public function __construct($nome_tabela, $arrValores)
     {
         $this->setNome($nome_tabela);
+        $this->verificaArrValores($arrValores);
         $this->parse($arrValores);
     }
 
@@ -81,12 +93,17 @@ class Tabela {
         $this->arrCamposPreencher = $arrValores[self::CAMPOS_PREENCHER];
         $this->parseCamposPreencher();
 
+        if ( array_key_exists(self::DE_PARA, $arrValores) == true ) {
+            $this->arrDePara = $arrValores[self::DE_PARA];
+        }
+                
+        $this->parseDePara();
+
         return $this;
     }
 
     /**
      * Realiza o parse dos campos
-     * @param  array $arrValores campos
      * @return self
      */
     private function parseCamposPreencher()
@@ -146,5 +163,45 @@ class Tabela {
     {
         return $this->arrObjDePara;
     }
+
+    public function getArrDePara()
+    {
+        return $this->arrDePara;
+    }
+
+    /**
+     * Realiza o parse dos de-para
+     * @return self
+     */
+    private function parseDePara()
+    {
+        if (count($this->getArrDePara()) > 0) {
+            foreach ($this->getArrDePara() as $nome_tabela => $array) {
+
+                $this->arrObjDePara[] = new DePara(
+                    $nome_tabela,
+                    $array[self::ORIGEM],
+                    $array[self::DESTINO],
+                    $array[self::REGISTROS]
+                );
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Realiza o teste para verificar se a tabela está bem formada
+     * @param  array
+     */
+    private function verificaArrValores($arrValores)
+    {
+        if ( array_key_exists(self::QTD_REGISTROS, $arrValores) == false ) {
+            throw new \Exception('A chave '. self::QTD_REGISTROS . ' não existe. Favor criar no YAML.');
+        }
         
+        if ( array_key_exists(self::CAMPOS_PREENCHER, $arrValores) == false ) {
+            throw new \Exception('A chave '. self::CAMPOS_PREENCHER . ' não existe. Favor criar no YAML.');
+        }
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace DatabaseTest\file;
+namespace DatabaseTest\File;
 
 use Database\File\Arquivo;
 use org\bovigo\vfs\vfsStream;

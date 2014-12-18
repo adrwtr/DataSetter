@@ -10,7 +10,7 @@ class CampoPreencherTest extends \PHPUnit_Framework_TestCase
     {
         $objCampoPreencher = new CampoPreencher(
             'nome',
-            'tipo'
+            'tipo_nome_field'
         );
         
         $this->assertEquals(
@@ -19,7 +19,7 @@ class CampoPreencherTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(
-            'tipo',
+            'tipo_nome_field',
             $objCampoPreencher->getTipo()
         );
     }
@@ -28,9 +28,13 @@ class CampoPreencherTest extends \PHPUnit_Framework_TestCase
     {
         $objCampoPreencher = new CampoPreencher(
             'nome',
-            'valor'
+            'tipo_nome_field'
         );
         $objCampoPreencher->parse();
-        $this->assertTrue(true);
+
+        $this->assertEquals(
+            'Database\Parser\Elementos\Tipos\TipoNomeField',
+            get_class($objCampoPreencher->getObjTipo())
+        );
     }
 }

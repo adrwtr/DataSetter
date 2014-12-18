@@ -35,7 +35,8 @@ class CampoPreencher {
     {
         $this->setObjTipo(
             TiposFactory::criarTipo(
-                $this->getTipo()
+                $this->getTipo(),
+                $this
             )
         );
     }
@@ -102,5 +103,15 @@ class CampoPreencher {
     {
         $this->objTipo = $objTipo;
         return $this;
+    }
+
+    /**
+     * Retorna o resultado do tipo do campo
+     * @return mixed
+     */
+    public function getResultado($chave = 0)
+    {
+        return $this->getObjTipo()
+            ->getResultado($chave);
     }
 }
